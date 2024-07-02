@@ -2,7 +2,6 @@ const { response } = require("express");
 const Usuario = require("../models/usuario");
 const bcrypt = require("bcryptjs");
 const { generarJWT } = require("../helpers/jwt");
-const usuario = require("../models/usuario");
 
 const crearUsuario = async (req, res = response) => {
   const { email, password } = req.body;
@@ -51,7 +50,7 @@ const login = async (req, res = response) => {
         msg: "contrasea no valida",
       });
     }
-    const token = await generarJWT(usuario.id);
+    const token = await generarJWT(usuarioDB.id);
     res.json({
       ok: true,
       usuario: usuarioDB,
